@@ -1,9 +1,10 @@
-import pyperclip
+
 import kivy
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
+from kivy.core.clipboard import Clipboard
 
 import random
 
@@ -42,7 +43,7 @@ class MyRoot(BoxLayout):
    
     def copy(self, instance=None):
         copyresult = str(self.result_label.text)
-        pyperclip.copy(copyresult)
+        Clipboard.copy(copyresult)
         
 class TekenPoppetjeApp(App):
     def build(self):
