@@ -1,11 +1,12 @@
+import pyperclip
 import kivy
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
+
 import random
 
-kivy.require('2.0.0')
 
 class MyRoot(BoxLayout):
     def __init__(self, **kwargs):
@@ -16,6 +17,9 @@ class MyRoot(BoxLayout):
         self.generate_button = Button(text="Genereer Karakter", size_hint=(1, 0.2))
         self.generate_button.bind(on_press=self.generate_character_prompt)
         self.add_widget(self.generate_button)
+        self.copy_button = Button(text="Copy de lijst", size_hint=(1, 0.2))
+        self.copy_button.bind(on_press=self.copy)
+        self.add_widget(self.copy_button)
 
     def generate_character_prompt(self, instance=None):
         # Karaktereigenschappen
@@ -34,7 +38,12 @@ class MyRoot(BoxLayout):
 
         # Resultaat weergeven
         self.result_label.text = f"Geslacht: {geslacht}\nEtniciteit: {etniciteit}\nLeeftijd: {leeftijd}\nEmotie: {emotie}\nHaarstijl: {haar_style}\nHoofdaccessoires: {hoofdac}\nGezicht: {gezicht}\nBovenlichaam kleding: {bovenlichaam_kleding}\nOnderlichaam kleding: {onderlichaam_kleding}\nSchoenen: {schoenen}\nAccessoires 1: {accessoires1}\nAccessoires 2: {accessoires2}"
-
+        
+   
+    def copy(self, instance=None):
+        copyresult = str(self.result_label.text)
+        pyperclip.copy(copyresult)
+        
 class TekenPoppetjeApp(App):
     def build(self):
         return MyRoot()
